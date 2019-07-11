@@ -25,3 +25,4 @@ IllegalAccessException
 IllegalArgumentException
 InvocationTargetException
 InvalidClassException
+SQLException
