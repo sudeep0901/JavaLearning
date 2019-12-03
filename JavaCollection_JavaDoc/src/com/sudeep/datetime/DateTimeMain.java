@@ -1,5 +1,6 @@
 package com.sudeep.datetime;
 
+import java.time.Clock;
 import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -7,13 +8,19 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.time.OffsetDateTime;
+import java.time.Period;
 import java.time.Year;
 import java.time.YearMonth;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.time.chrono.HijrahDate;
+import java.time.chrono.JapaneseDate;
+import java.time.chrono.MinguoDate;
+import java.time.chrono.ThaiBuddhistDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
@@ -112,6 +119,43 @@ public class DateTimeMain {
 		DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM-d-yyyy");
 		date1 = LocalDate.parse(in,df);
 		System.out.println(date1);
+		
+		LocalDate today = LocalDate.now();
+		LocalDate birthday = LocalDate.of(1984, Month.JANUARY, 9);
+		
+		Period p = Period.between(birthday, today);
+		System.out.println(p);
+		System.out.println(p.getYears());
+		long p2 = ChronoUnit.DAYS.between(birthday, today);
+
+		System.out.println(p2);
+		System.out.println(Clock.systemUTC().getZone());
+		
+		LocalDateTime date2 = LocalDateTime.of(2013, Month.JULY, 20, 19, 30);
+		JapaneseDate jdate     = JapaneseDate.from(date2);
+		HijrahDate hdate       = HijrahDate.from(date2);
+		MinguoDate mdate       = MinguoDate.from(date2);
+		ThaiBuddhistDate tdate = ThaiBuddhistDate.from(date2);
+		
+		System.out.println(jdate);
+		System.out.println(hdate);
+		System.out.println(mdate);
+		System.out.println(tdate);
+		int year1 = 2019;
+		System.out.printf("For the year %d:%n", year1);
+        for (Month month : Month.values()) {
+        	System.out.println(month);
+            YearMonth ym1 = YearMonth.of(year1, month);
+            System.out.printf("%s: %d days%n", month, ym1.lengthOfMonth());
+        }
+//        LocalDate date3 = Year.now().atMonth(month).atDay(1).
+//                with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
+//          Month mi = date.getMonth();
+//          while (mi == month) {
+//              System.out.printf("%s%n", date);
+//              date = date.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+//              mi = date.getMonth();
+//          }
 	}
 }
 
