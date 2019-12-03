@@ -10,7 +10,15 @@ Serial version Unique Identifier - to maintain compatibility between various ver
 serialver utility to create serial version - 
 cmd>serialver -show
 serialver -classpath bin com.sudeep.serialization.Employee
+XML DTD
+DTD stands for Document Type Definition.
 
+share DB Connection between separate JVM
+java.concurrent.util.atomic
+types of viewresolver
+	tilesviewresolver
+	contentviewresolver
+	spring tags
 
 # Exceptions
 ----------------------------------
