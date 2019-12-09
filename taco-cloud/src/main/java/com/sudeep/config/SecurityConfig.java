@@ -77,20 +77,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //		.and()
 //		.csrf()
 //		.disable()
+		
+		
 		// TODO Auto-generated method stub
 		http.authorizeRequests()
-		.antMatchers("/design", "/orders")
-		.hasRole("USER")
 		.antMatchers("/", "/**")
 		.permitAll()
+		.antMatchers("/design", "/orders")
+		 .access("hasRole('ROLE_USER')")
+//		.hasRole("USER")
+		
+		
 		.and()
-		.formLogin()
-		.loginPage("/login")
+			.formLogin()
+				.loginPage("/login")
 		.loginProcessingUrl("/authenticate")
-		.defaultSuccessUrl("/design", true)
+					.defaultSuccessUrl("/design", true)
+		
+	      // tag::enableLogout[]
+
 		.and()
-		.logout()
-		.logoutSuccessUrl("/");
+			.logout()
+				.logoutSuccessUrl("/")
+		  // Make H2-Console non-secured; for debug purposes
+	      // tag::csrfIgnore[]
+	      .and()
+	        .csrf()
+	          .ignoringAntMatchers("/h2-console/**")
+	      // end::csrfIgnore[]
+
+	      // Allow pages to be loaded in frames from the same origin; needed for H2-Console
+	      // tag::frameOptionsSameOrigin[]
+;
 		
 // can custommize username and password field name in login.html
 //		.usernameParameter("user")
