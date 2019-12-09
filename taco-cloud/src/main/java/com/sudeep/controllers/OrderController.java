@@ -1,9 +1,12 @@
 package com.sudeep.controllers;
 
-import java.security.Principal;
+ import java.security.Principal;
 
 import javax.validation.Valid;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContext;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.sudeep.data.OrderProps;
 import com.sudeep.domain.Order;
 import com.sudeep.repository.OrderRepository;
 import com.sudeep.security.User;
@@ -32,8 +36,20 @@ public class OrderController {
 
 	private UserRepository userRepo;
 	private OrderRepository orderRepo;
+//	
+//	private int pageSize = 20;
+//	
+//	public int getPageSize() {
+//		return pageSize;
+//	}
+//
+//	public void setPageSize(int pageSize) {
+//		this.pageSize = pageSize;
+//	}
+	
+	private OrderProps props;
 
-	public OrderController(OrderRepository orderRepo) {
+	public OrderController(OrderRepository orderRepo, OrderProps props) {
 		this.orderRepo = orderRepo;
 	}
 
@@ -70,5 +86,16 @@ public class OrderController {
 
 		log.info("Order submitted: " + order);
 		return "redirect:/";
+	}
+	
+	@GetMapping
+	public String orderForUser(@AuthenticationPrincipal User user, Model model) {
+		
+		Pageable page =  PageRequest.of(0, props.getPageSize());
+		
+//		model.addAttribute("orders",orderRepo.findByUserOrderByPlacedAtDesc(user, page));
+		return "orderList";
+		
+		
 	}
 }

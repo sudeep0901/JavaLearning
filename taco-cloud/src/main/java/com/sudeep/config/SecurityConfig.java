@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+//@Profile("!nosecurity")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -83,27 +85,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/", "/**")
 		.permitAll()
-		.antMatchers("/design", "/orders")
-		 .access("hasRole('ROLE_USER')")
+//		.antMatchers("/design", "/orders")
+//		 .access("hasRole('USER')")
 //		.hasRole("USER")
 		
 		
-		.and()
-			.formLogin()
-				.loginPage("/login")
-		.loginProcessingUrl("/authenticate")
-					.defaultSuccessUrl("/design", true)
+//		.and()
+//			.formLogin()
+//				.loginPage("/login")
+////		.loginProcessingUrl("/authenticate")
+//					.defaultSuccessUrl("/design", true)
 		
 	      // tag::enableLogout[]
 
-		.and()
-			.logout()
-				.logoutSuccessUrl("/")
+//		.and()
+//			.logout()
+//				.logoutSuccessUrl("/")
 		  // Make H2-Console non-secured; for debug purposes
 	      // tag::csrfIgnore[]
-	      .and()
-	        .csrf()
-	          .ignoringAntMatchers("/h2-console/**")
+//	      .and()
+//	        .csrf()
+//	          .ignoringAntMatchers("/h2-console/**")
 	      // end::csrfIgnore[]
 
 	      // Allow pages to be loaded in frames from the same origin; needed for H2-Console
