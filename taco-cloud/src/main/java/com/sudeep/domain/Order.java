@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
@@ -18,6 +19,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
+
+import com.sudeep.security.User;
 
 import lombok.Data;
 
@@ -56,6 +59,10 @@ public class Order implements Serializable {
 	private String ccCVV;
 	private Date placedAt;
 
+	
+	@ManyToOne
+	private User user;
+	
 	@PrePersist
 	void placedAt() {
 		this.placedAt = new Date();

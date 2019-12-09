@@ -6,7 +6,7 @@
 <link rel="stylesheet" th:href="@{/styles.css}" />
 </head>
 <body>
-
+<input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
 	<h1>Design your taco!</h1>
 	<img th:src="@{/images/TacoCloud.png}" />
 
