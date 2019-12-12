@@ -14,7 +14,7 @@ public class WebConfig implements WebMvcConfigurer{
 		// TODO Auto-generated method stub
 		WebMvcConfigurer.super.addViewControllers(registry);
 		registry.addViewController("/code").setViewName("code");
-		
+		registry.addViewController("/login");
 //		registry.addStatusController("/", HttpStatus.OK);
 		
 	}
