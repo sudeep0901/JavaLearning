@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 28, 2019 10:21:00 AM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <subclass name="com.sudeep.hibernate.GPS" extends="com.sudeep.hibernate.Coordinates" discriminator-value="GPS" lazy="false">
+        <property name="latitude" type="double">
+            <column name="LATITUDE" />
+        </property>
+        <property name="longitude" type="double">
+            <column name="LONGITUDE" />
+        </property>
+    </subclass>
+</hibernate-mapping>
